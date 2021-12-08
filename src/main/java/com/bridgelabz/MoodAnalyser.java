@@ -13,18 +13,17 @@ public class MoodAnalyser {
 		this.message = message;
 	}
 
-	public String analyseMood() {
+	public String analyseMood() throws MoodAnalysisException {
 
-		try {
-			if (message.contains("Sad")) {
-				return "SAD";
-			} else {
-				return "HAPPY";
-			}
-		} catch (NullPointerException e) {
+		if (message == null) {
+			throw new MoodAnalysisException("invalid Mood : " + MoodAnalysisException.ExceptionType.NULL);
+		} else if (message.equals("")) {
+			throw new MoodAnalysisException("invalid Mood : " + MoodAnalysisException.ExceptionType.EMPTY_MOOD);
+		} else if (message.contains("Sad")) {
+			return "SAD";
+		} else {
 			return "HAPPY";
 		}
 
 	}
-
 }
